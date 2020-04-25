@@ -32,7 +32,7 @@ class Say
       'zero'
     when 1..15
       ones_tens_early_mid_teens
-    when 16, 17, 18, 19
+    when 16..19
       late_teens
     when 20..99
       more_than_nineteen
@@ -44,16 +44,16 @@ class Say
   end
 
   def late_teens
-    remainder = number % number.floor(-1)
+    remainder = number % number_to_translation_key
     "#{number_translation[remainder]}teen".gsub(/tt/,'t')
   end
   
   def more_than_nineteen
-    if (number % number.floor(-1)).zero?
+    if (number % number_to_translation_key).zero?
       number_translation[number]
     else
-      remaninder = (number % number.floor(-1))
-      "#{number_translation[(number.floor(-1))]}-#{number_translation[remaninder]}"
+      remaninder = (number % number_to_translation_key)
+      "#{number_translation[(number_to_translation_key)]}-#{number_translation[remaninder]}"
     end
   end
 
